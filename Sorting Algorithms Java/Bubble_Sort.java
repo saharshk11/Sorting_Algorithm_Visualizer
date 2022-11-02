@@ -1,0 +1,45 @@
+import java.util.Arrays;
+
+public class Bubble_Sort extends Sorting_Algorithm{
+    private int length;
+    private String name;
+    private long comparisons;
+
+    public Bubble_Sort(int length){
+        this.length = length;
+        name = "Bubble Sort";
+        comparisons = 0;
+    }
+
+    public int[] sort(int[] arr){
+        comparisons = 0;
+        for(int i = 0; i < arr.length; i++){
+            for(int j = 0; j < arr.length-1; j++){
+                if(arr[j] > arr[j+1]){
+                    switchPosition(arr, j, j+1);
+                }
+                comparisons++;
+            }
+        }
+        return arr;
+    }
+
+    public void generateRandom(boolean show){
+        System.out.println(name);
+//        create shuffled array
+        int[] arr = shuffle(length);
+        if(show){
+            System.out.println(Arrays.toString(arr));
+        }
+
+//        sort array
+        long startTime = System.currentTimeMillis();
+        arr = sort(arr);
+        long endTime = System.currentTimeMillis();
+        if(show){
+            System.out.println(Arrays.toString(arr));
+        }
+        System.out.printf("%.5f seconds\n", (endTime-startTime)/1000.0);
+        System.out.println("Comparisons: " + comparisons + "\n");
+    }
+}
